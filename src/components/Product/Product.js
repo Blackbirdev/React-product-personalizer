@@ -8,9 +8,14 @@ const Product = props => {
 
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
+  const [currentPrice, setCurrentPrice] = useState(props.sizes[0].additionalPrice);
 
   const prepareColorClassName = color => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
+  }
+
+  const getPrice = () => {
+    return props.basePrice + currentPrice;
   }
 
   return (
@@ -25,7 +30,7 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {props.basePrice}$</span>
+          <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
@@ -33,7 +38,7 @@ const Product = props => {
             <ul className={styles.choices}>
               {props.sizes.map(size =>
                 <li key={size.name}>
-                  <button type="button" onClick={() => { setCurrentSize(size.name) }} className={clsx(size.name === currentSize && styles.active)}>{size.name}
+                  <button type="button" onClick={() => { setCurrentSize(size.name); setCurrentPrice(size.additionalPrice) }} className={clsx(size.name === currentSize && styles.active)}>{size.name}
                   </button>
                 </li>
               )}
