@@ -33,7 +33,7 @@ const Product = props => {
             <ul className={styles.choices}>
               {props.sizes.map(size =>
                 <li key={size.name}>
-                  <button type="button" className={clsx(size.name === currentSize && styles.active)}>{size.name}
+                  <button type="button" onClick={() => { setCurrentSize(size.name) }} className={clsx(size.name === currentSize && styles.active)}>{size.name}
                   </button>
                 </li>
               )}
@@ -44,7 +44,7 @@ const Product = props => {
             <ul className={styles.choices}>
               {props.colors.map(item =>
                 <li key={item}>
-                  <button type="button" className={clsx(prepareColorClassName(item), item === currentColor && styles.active)} />
+                  <button type="button" onClick={() => { setCurrentColor(item) }} className={clsx(prepareColorClassName(item), item === currentColor && styles.active)} />
                 </li>
               )}
             </ul>
